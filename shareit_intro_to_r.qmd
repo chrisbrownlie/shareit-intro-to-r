@@ -1,0 +1,324 @@
+---
+title: "Intro to R"
+subtitle: "ShareIT 3rd October 2024"
+author: "Chris Brownlie"
+format:
+  revealjs:
+    theme: sky
+    transition: slide
+    navigation-mode: vertical
+    embed-resources: true
+---
+
+# Me
+
+- R user since 2018
+- BW since October 2022
+- Management Decision Analytics - Employer Consulting
+- Recently returned from a 4 month sabbatical!
+
+# Assumptions
+
+- Know what a programming language is
+- Have heard of Python, maybe heard of R
+- Don't know anything else about it
+
+::: {.notes}
+- As you all work in IT I'm going to assume familiarity with technological terms
+- Pretty much everyone has heard of Python if not used it, R is less well known
+- Will assume a level of technical knowledge
+- But will assume zero knowledge of or interactions with R
+- Won't be talking too much about the ins and outs of using it or showing R code, probably wouldn't be of interest
+- Mostly just the elevator pitch of what it is and why it is used
+:::
+
+# R is 31 years old
+
+```{mermaid}
+flowchart LR
+    a[<b>1976</b> <br><br> 'S' first released]
+    b[<b>1995</b> <br><br> 'R' first released]
+    c[<b>1997</b> <br><br> CRAN founded]
+    d[<b>2000</b> <br><br> R v1.0 release]
+    e[<b>2012</b> <br><br> Shiny first released]
+    f[<b>2018</b> <br><br> I start using R!]
+    g[<b>2024</b> <br><br> R v4.4.1]
+    a --> b
+    b --> c
+    c --> d
+    d --> e
+    e --> f
+    f --> g
+    classDef default fill:#276DC2,color:#ffffff,fontSize:30px
+```
+
+- Statistical programming language
+- Written in C and Fortran
+- [Primarily functional](https://adv-r.hadley.nz/fp.html#:~:text=R%2C%20at%20its%20heart%2C%20is%20a%20functional%20language.)
+
+::: {.notes}
+- R has been around since 1995
+- It was heavily inspired by the S programming language, invented in 1976
+- Specifically written for statistical analysis and visualisation - contrasts to Python which was written to be general purpose
+- (Written in C like Python but also Fortran)
+- Most popular programming languages are object oriented (either purely OOP or allow/encourage it)
+- Some of these also allow alternative approaches like functional programming (e.g. C++)
+- But OOP has been the dominant programming paradigm/method for the last few decades
+- With OOP, you focus on objects in your program and how you want them to behave/interact with other objects
+- Functional style where you focus on independent chunks of code (functions)
+- Which can be treated as any other data object (assign to a value, store in a list, pass as an argument to another function)
+- R is a functional language.
+- Not strictly functional as pure functions (always the same outputs for same inputs, and no side effects) not required
+- But lends itself to a functional style well
+:::
+
+# Who uses R?
+
+## TIOBE Rankings (all devs)
+![](assets/tiobe_rankings.png)
+:::{.notes}
+- Developed by academics, which is probably why it is more popular in academia
+- Consistently in the top 15-20 most popular programming languages among software developers
+- Misleading as it is more popular with data scientists 
+(currently no. 6 on PyPL, which looks at how often tutorials for that language are being googled)
+:::
+
+## PyPL rankings (Google searches)
+![](assets/pypl_rankings.png)
+:::{.notes}
+- Developed by academics, which is probably why it is more popular in academia
+- Consistently in the top 15-20 most popular programming languages among software developers
+- Misleading as it is more popular with data scientists 
+(currently no. 6 on PyPL, which looks at how often tutorials for that language are being googled)
+:::
+
+## Kaggle rankings (Data Scientists)
+![](assets/kaggle_rankings.png)
+
+
+:::{.notes}
+- Developed by academics, which is probably why it is more popular in academia
+- Consistently in the top 15-20 most popular programming languages among software developers
+- Misleading as it is more popular with data scientists 
+(currently no. 6 on PyPL, which looks at how often tutorials for that language are being googled)
+:::
+
+# How we use R: IDEs {.smaller}
+
+
+## RStudio
+
+![RStudio IDE screenshot](assets/rstudio_screen.png){width="750" height="500"}
+
+:::{.notes}
+- IDEs (Integrated Development Environments) are pieces of software we use to write code efficiently
+- The most commonly used IDE for R users is an IDE called RStudio, developed by a company called Posit (formerly RStudio) since 2011
+- Is an IDE specifically designed for using R, interactive analysis and being beginner friendly
+- Integrates well with git (provides a GUI), popular shiny frameworks (RMarkdown, Quarto, Shiny), and projects
+- ~80% of R developers use RStudio (https://www.jetbrains.com/lp/devecosystem-2023/r/)
+
+:::
+
+## VS Code
+
+![VS Code screenshot](assets/vscode_screen.png){width="850" height="500"}
+
+:::{.notes}
+- Most of you here I'm guessing will know or know of Visual Studio and VS Code, two IDEs developed by Microsoft
+- VS Code I would say is most popular IDE for data scientists learning R as a second language
+:::
+
+## Positron
+
+![Positron IDE screenshot](assets/positron_screen.png){width="750" height="500"}
+
+:::{.notes}
+- RStudio is not designed for multiple different languages, primarily R with some Python support too
+- Positron is a fork of VSCode announced recently by Posit
+- Aimed at R and Python users, part of a move towards being R *and* Python focussed
+- As of 2023, 95% of R developers used RStudio or VSCode (https://www.jetbrains.com/lp/devecosystem-2023/r/)
+- (Third most popular is Jupyter)
+:::
+
+# How we use R: Package ecosystem
+
+::::{.columns}
+
+:::{.column width="30%"}
+
+![](assets/cran_task_views.png)
+
+:::
+
+:::{.column width="70%"}
+
+![](assets/cran_task_view_maps.png)
+:::
+::::
+
+:::{.notes}
+- One of R strengths is the package ecosystem
+- Comprehensive R Archive Network, collection of servers hosting R packages
+- Can be installed via R with a single line of code
+- Task views show the most common use cases for R here
+- Over 21k packages currently, these here are well used or respected
+- If used Python, this is the equivalent to PyPI
+- Can install from Github also, with a single line of code
+:::
+
+# Why we use R: 'but Python'?
+
+## The big debate
+
+![](assets/r_vs_python_articles.png)
+
+:::{.notes}
+- As noted previously, Python is considerably more popular than R
+- They have vastly different backgrounds and as such, some people find one syntax more natural than the other
+- In reality, they are two tools with which you can usually achieve the same goals
+- The person writing the code will almost always have a bigger influence on the effectiveness of the solution
+- There are some areas in which one is better than the other
+- Python generally easier to write production programs in (more dev tools due to more popularity)
+- Python better for a lot of ML/AI as allows easy running on GPUs
+- Python has more packages (600k vs 20k) so wider variety of specialised tools
+:::
+
+## Is Python faster than R?
+
+![[C vs Julia vs Python vs R](https://towardsdatascience.com/r-vs-python-vs-julia-90456a2bcbab)](assets/r_vs_python_benchmarks.png)
+
+:::{.notes}
+- A commonly quoted idea is that R is slow, or at least objectively slower than Python
+- But this is very reductive, naturally they are both slower than e.g. C because they are both a layer of abstraction over it
+- For the vast majority of operations, the method you choose is more important than whether you use R or Python
+- This image shows a particular operation (linear search for membership) with different approaches
+- Generally it comes down to the developers understanding of the language
+- (and if there are any specialised tools available which remove the need for that understanding)
+- Worth bearing in mind who R is popular with: i.e. not software developers, so that is often to blame
+- Popular with people who want to 'do stuff with data' and are less concerned with how well it performs
+- Software best practices and optimisation are often neglected
+- Generally, aside from some specialised use cases, anything you can do in Python you can do in R
+- The developer doing the coding will have a bigger impact than the language being used
+http://adv-r.had.co.nz/Performance.html
+:::
+
+# Why we use R: strengths
+
+## {tidyverse}
+
+
+:::{layout-ncol=2}
+![[Example {dplyr} code](https://www.sumsar.net/blog/pandas-feels-clunky-when-coming-from-r/)](assets/tidyverse_code.png)
+
+![[Example pandas code](https://www.sumsar.net/blog/pandas-feels-clunky-when-coming-from-r/)](assets/pandas_code.png)
+:::
+
+:::{.notes}
+- One of the best things about R is the tidyverse, a collection of packages with a standardised interface
+- Designed for analysis and to be easy to learn
+- Has become the de facto way we do data cleaning, manipulation, and analysis
+- This example is using the dplyr package (which is part of the tidyverse)
+- It is clear to see what is going on
+- tidyverse functions use the same structure, use simple verbs
+- Has lead to a bit of a split in R with base R vs tidyverse
+- Imo tidyverse generally preferred: more consistent and someone new to the project will be more likely to understand
+- Complaints about tidyverse: performance (although core functionality is done in cpp anyway) and changes (only really matters if you're developing something once to run for years, which I don't believe is good practice)
+:::
+
+## RMarkdown/Quarto
+
+- Dynamically generated documents
+- Static websites
+- Interactive elements
+
+:::{.notes}
+- RMarkdown is a framework for creating reproducible analytical reports
+- Some similiarities to Jupyter in how it looks (mix text with code blocks)
+- E.g. you have a report that uses some data to create charts and tables
+- When that data gets updated, you just re-render the report, can see the code used (QA check) and export to multiple file types
+- Quarto is the next generation of it that allows using a wider variety of languages
+- This presentation is written in Quarto, and rendered using revealjs a javascript library
+- You can also create static websites written entirely in Quarto, using R code for figures, tables and plots
+- You can also embed interactive elements using {shiny}, which is Rs other great strength
+:::
+
+## Shiny
+
+- Framework for developing web apps
+- Easy learning curve
+- Translates R to web stack
+
+![MDA's Data Navigator Shiny App](assets/dn4s_screenshot.png)
+
+:::{.notes}
+- Particularly until the last year or so (but even still now), I think shiny is the main advantage R has over Python
+- If you want to create a data-based web application, shiny (R) is clearly ahead in a few categories:
+- Ease of learning, flexibility of expression (lazy evaluation means its easy to avoid shiny doing too much), minimal effort for maximal gain
+- Shiny for Python, Plotly Dash, Streamlit etc. are starting to fill the gap
+- Shiny for R existed since 2012 so has that advantage over the others
+- What shiny basically does is translate R code into HTML, CSS and Javascript, so R developers don't need to know them in order to get started
+- Allows developers to not have to think about client-server interactions, the websockets that handle that communication or how the complexities of front end development
+- Naturally if you want to build a production/enterprise app you will need to know more but the ease of getting started is a big plus
+:::
+
+# R from an IT perspective
+
+## Under the hood
+
+- Interpreted
+- Single threaded
+- Memory inefficient
+
+:::{.notes}
+- R is an interpreted language which means it isn't pre-compiled
+- This is where it gets its benefits in interactive data analysis and exploration
+- Also why it isn't as fast (as compiled languages)
+- It is single threaded, same as Python is
+- Has support for multi-threading but it is arguably more difficult to do in R
+- Memory inefficient because it relies heavily on garbage collection, can't manually deallocate memory
+- Doesn't have the methods Python has which removes unreachable cyclical references
+- This, combined with the lazy evaluation that R uses means that memory often isn't deallocated in an efficient/timely way
+- Likewise, data is by default read in in its entirety which can lead to memory issues
+https://janvitek.org/pubs/ecoop12.pdf
+:::
+
+## Dependency management
+
+- Docker & {renv}
+- {rix}
+- Linux vs Windows
+
+:::{.notes}
+- R integrates well with Docker
+- There is an initiative called rocker which provides a variety of Docker images for R
+- We use Docker in our ShinyProxy infrastructure for hosting and deploying apps
+- The renv package creates a snapshot of R package dependencies for a project
+- Combining Docker and renv is probably the best way of maintaining dependencies for a project, especially in production
+- {rix} is a newer package, built on the Nix framework, which approaches the same problem in a slightly different way
+- Not used yet, my understanding is Nix is sort of like a combination of the two, bundles everything into the same environment
+- Docker still the most popular
+- Something to be aware of as someone in IT or just developing in R
+- It is common to develop in Windows and deploy to Linux
+- R packages are precompiled to binary packages for windows, in linux they are generally installed from source
+- This means on linux we often need various compilers and build tools that aren't required in development
+- Other things which cause issues when deploying include: file paths, case sensitivity,
+:::
+
+## Security considerations
+
+- Open source
+- Packages are checked/built before being accepted to CRAN
+- Always a risk, weigh the pros and cons
+
+> R doesn’t stop you from shooting yourself in the foot, but as long as you don’t aim the gun at your toes and pull the trigger, 
+you won’t have a problem. - [Hadley Wickham, Advanced R](https://adv-r.hadley.nz/s3.html#:~:text=R%20doesn%E2%80%99t%20stop%20you%20from%20shooting%20yourself%20in%20the%20foot%2C%20but%20as%20long%20as%20you%20don%E2%80%99t%20aim%20the%20gun%20at%20your%20toes%20and%20pull%20the%20trigger%2C%20you%20won%E2%80%99t%20have%20a%20problem.)
+
+:::{.notes}
+- R is an open source language, which means anyone can see the source code for it
+- There are a lot of resources online which discuss the pros and cons of open source and security implications
+- General consensus is that open source languages are generally as safe as proprietary software
+- Although this quote is technically talking about something different (dynamic typing in R), I like it and think it applies to security concerns too
+- Recently there was a 'vulnerability' detected in older versions of R
+- Reading in unknown files of a particular type could lead to arbitrary code execution, many cybersecurity researchers objected to this as it applies to anything any time (don't read in files you don't know the origin of)
+https://www.linuxfoundation.org/blog/open-source-separating-fact-from-fiction#:~:text=%E2%9C%85Fact%3A%20Unlike%20closed%20source,coding%20practices%20when%20integrating%20dependencies.
+:::
